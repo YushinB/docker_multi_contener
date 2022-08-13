@@ -113,3 +113,9 @@ docker run --name backend_app -d --rm -p 80:80 -v "D:\Source\Git\Docker\multi-01
 ```
 docker run -v "D:\Source\Git\Docker\multi-01-starting-setup\frontend\src":/app/src --name frontend_app -d --rm  -p 3000:3000 frontend:1.1
 ```
+
+## Development vs Production/ Deployment.<br>
+![image](https://user-images.githubusercontent.com/34083808/184497138-1828ce18-071d-4d46-9ea3-caa2c7811dba.png)
+
+## Room for Improvement.<br>
+![image](https://user-images.githubusercontent.com/34083808/184497160-92b34fab-34ae-43f1-b636-651898714022.png)
