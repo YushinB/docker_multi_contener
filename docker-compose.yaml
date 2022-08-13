@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  mongodb:
+    image: "mongo"
+    volumes:
+      - data:/data/db
+    #environment:
+    #- MONGO_INITDB_ROOT_USERNAME=yushin
+    #- MONGO_INITDB_ROOT_PASSWORD=admin
+    # - MONGODB_USERNAME yushin
+    env_file:
+      - ./env/mongo.env
+    # docker compose will automatically create the network for the container within the YAML file.
+    # network:
+    #  - goals-net
+
+  #backend:
+  #  image: "mongo"
+  #frontend:
+  #  image: "mongodb"
+# the name volume shoud be declare here.
+# name volume can be shared among container.
+volumes:
+  data:
