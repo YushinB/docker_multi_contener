@@ -4,6 +4,7 @@ services:
     image: "mongo"
     volumes:
       - data:/data/db
+    #container_name: mongodb
     #environment:
     #- MONGO_INITDB_ROOT_USERNAME=yushin
     #- MONGO_INITDB_ROOT_PASSWORD=admin
@@ -13,12 +14,39 @@ services:
     # docker compose will automatically create the network for the container within the YAML file.
     # network:
     #  - goals-net
-
-  #backend:
-  #  image: "mongo"
-  #frontend:
+  backend:
+    build: ./backend
+    #build:
+    #  context: ./backend
+    #  dockerfile: Dockerfile
+    #  args'
+    #    some-arg: 1
+    # the detach mode is enable by default, so no need to setup the detach mode.
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb
+  frontend:
+    build: ./frontend
+    # port
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    # to enable attach mode, need to add below setting to yaml file
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
   #  image: "mongodb"
 # the name volume shoud be declare here.
 # name volume can be shared among container.
 volumes:
   data:
+  logs:
